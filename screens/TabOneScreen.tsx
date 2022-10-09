@@ -9,7 +9,7 @@ import Fretboard from '../assets/images/fretmax.png';
 // const Fretboard = { uri: "../assets/images/fretmax.png" };
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-  let pitchesTime = [];
+  let pitchesPressed = [];
   const [audioFile, setAudioFile] = useState(false);
   const [one, setone] = useState(Boolean)
   const [two, settwo] = useState(false)
@@ -85,18 +85,6 @@ const [root2, setRoot2] = useState(false);
 const [root3, setRoot3] = useState(false);
 const [root4, setRoot4] = useState(false);
 const [root5, setRoot5] = useState(false);
-
-
-
-
-
-
-  const [a31, set31] = useState(false)
-  const [a32, set32] = useState(false)
-  const [a33, set33] = useState(false)
-  const [a34, set34] = useState(false)
-  const [a35, set35] = useState(false)
-  const [a36, set36] = useState(false)
 
   const[scaleSchema, setScaleSchema]= useState("A");
 
@@ -180,7 +168,6 @@ if(!one)
     setDisplay30(3)
 
 }
-    
     break;
 
     case 'Amin': console.log('b');
@@ -252,48 +239,39 @@ if(!one)
         setDisplay29(3)
         setDisplay30(0)
 
-
     }
 
     break;
 
     case 'C': console.log('c');
     
-    
     break;
 
     case 'Db': console.log('Db');
-    
     
     break;
 
     case 'D': console.log('D');
     
-    
     break;
 
     case 'Eb': console.log('Eb');
-    
     
     break;
 
     case 'E': console.log('E');
     
-    
     break;
 
     case 'F': console.log('F');
-    
     
     break;
 
     case 'F#': console.log('F#');
     
-    
     break;
 
     case 'G': console.log('G');
-    
     
     break;
 
@@ -311,10 +289,10 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
 const buttonPress = async (param: string) => {
 console.log(param, 'param')
 
-    //   const {sound}  = await Audio.Sound.createAsync( require('../sound.mp3'));
-    // setAudioFile(sound);
+pitchesPressed.push(param);
+console.log(pitchesPressed)
 
-    //to switch keys, define root as a number (1-12) then name audio files "1.wav"-"30.wav", use ${parseInt(root) + num}.wav
+    // THE IDEA -->>>>>>>>>> to switch keys, define root as a number (1-12) then name audio files "1.wav"-"30.wav", use ${parseInt(root) + num}.wav
     const sound = new Audio.Sound();
 
         switch(param) {
@@ -322,162 +300,163 @@ console.log(param, 'param')
                 case "1":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/a.wav`));
-                        await sound.playAsync();
+                        
                        
                 break;
                 case "2":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/bb.wav`));
-                        await sound.playAsync();
+                        
                 break;    
                 case "3":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/b.wav`));
-                        await sound.playAsync();
+                        
                       
                 break;
                 case "4":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/C.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "5":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/db.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "6":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/d.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "7":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/eb.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "8":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/e.wav`));
-                        await sound.playAsync();
+                        
                 break;    
                 case "9":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/f.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "10":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/Fsharp.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "11":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/g.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "12":
 
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/ab1.wav`));
-                        await sound.playAsync();
+                        
 
                 break;
                 case "13":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/a1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "14":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/bb1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "15":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/b1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "16":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/C1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "17":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/db1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "18":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/d1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "19":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/eb1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "20":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/e1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "21":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/e1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "22":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/f1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "23":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/Fsharp1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "24":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/g1.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "25":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/ab2.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "26":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/a2.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "27":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/bb2.wav`));
-                        await sound.playAsync();
+                        
                         
                 break;
                 case "28":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/b2.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "29":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/C2.wav`));
-                        await sound.playAsync();
+                        
                 break;
                 case "30":
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/db2.wav`));
-                        await sound.playAsync();
+                        
                 break;
-
+              
 
         }
 
+        await sound.playAsync();
 }
 
   return (
@@ -495,93 +474,94 @@ console.log(param, 'param')
 }
 <ImageBackground
   source={Fretboard}
-  style={{height: 500, width: 220, marginTop: -120,}}
+  style={{height: 600, width: 220, marginTop: -120,}}
 > 
 
 {/* row 1 */}
-<View  style={{display: "flex", flexDirection: 'row', marginTop: 20, marginLeft: 0, zIndex:220}}>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12 }}
+<View  style={{display: "flex", flexDirection: 'row', marginTop: 35, marginLeft: 0, zIndex:220}}>
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 25 }}
         onPressIn={()=>{one ? buttonPress('1'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: root1 ? "red" : "teal", padding: 2, opacity: one ? 1 : 0}}>{display1}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{six ? buttonPress('6'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: six ? 1 : 0}}>{display6}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{eleven ? buttonPress('11') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eleven ? 1 : 0}}>{display11}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{sixteen ? buttonPress('16') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: sixteen ? 1 : 0}}>{display16}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{twentyOne ? buttonPress('21'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyOne ? 1 : 0}}>{display21}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 0}}
         onPress={()=>{a26 ? buttonPress('26'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a26 ? 1 : 0}}>{display26}</Text></TouchableOpacity>
 </View>
 
 {/* row 2 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:58, zIndex:220}}>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 25}}
         onPress={()=>{two ? buttonPress('2') : null}}><Text style={{backgroundColor: root2 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: two ? 1 : 0}}>{display2}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{seven ? buttonPress('7') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2,opacity: seven ? 1 : 0}}>{display7}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{twelve ? buttonPress('12') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twelve ? 1 : 0}}>{display12}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{seventeen ? buttonPress('17') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: seventeen ? 1 : 0}}>{display17}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{twentyTwo ? buttonPress('22') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyTwo ? 1 : 0}}>{display22}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 0}}
         onPress={()=>{a27 ? buttonPress('27') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a27 ? 1 : 0}}>{display27}</Text></TouchableOpacity>
 </View>
 
 {/* row 3 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:58, zIndex:220}}>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 25}}
         onPress={()=>{three ? buttonPress('3') : null}}><Text style={{backgroundColor: root3 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: three ? 1 : 0}}>{display3}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{eight ? buttonPress('8') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eight ? 1 : 0}}>{display8}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{thirteen ? buttonPress('13') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: thirteen ? 1 : 0}}>{display13}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{eighteen ? buttonPress('18') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eighteen ? 1 : 0}}>{display18}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{twentyThree ? buttonPress('23') :null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyThree ? 1 : 0}}>{display23}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{a28 ? buttonPress('28') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a28 ? 1 : 0}}>{display28}</Text></TouchableOpacity>
 </View>
 
 {/* row 4 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:52, zIndex:220}}>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{four ? buttonPress('4') : null}}><Text style={{backgroundColor: root4 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: four ? 1 : 0}}>{display4}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{nine ? buttonPress('9') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nine ? 1 : 0}}>{display9}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{fourteen ? buttonPress('14') :null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fourteen ? 1 : 0}}>{display14}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{nineteen ? buttonPress('19') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nineteen ? 1 : 0}}>{display19}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{twentyFour ? buttonPress('24') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFour ? 1 : 0}}>{display24}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12, display: a29 ? "flex" : 'none'}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 0, display: a29 ? "flex" : 'none'}}
         onPress={()=>{a29 ? buttonPress('29'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a29 ? 1 : 0}}>{display29}</Text></TouchableOpacity>
 </View>
 
 {/* row 5 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:52, zIndex:220}}>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{five ? buttonPress('5') : null}}><Text style={{backgroundColor: root5 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: five ? 1 : 0}}>{display5}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{ten ? buttonPress('10') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: ten ? 1 : 0}}>{display10}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{fifteen ? buttonPress('15') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fifteen ? 1 : 0 }}>{display15}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{twenty ? buttonPress('20') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twenty ? 1 : 0}}>{display20}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{twentyFive ? buttonPress('25') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFive ? 1 : 0}}>{display25}</Text></TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10, marginRight: 12}}
+        <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
         onPress={()=>{ a30 ? buttonPress('30') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a30 ? 1 : 0}}>{display30}</Text></TouchableOpacity>
 </View>
 </ImageBackground>
 
 <TouchableOpacity style={{marginTop: -22, marginLeft: 10, marginRight: 12}}
         onPress={()=>{checkScaleSchema()}}><Text style={{borderRadius: 10, padding: 8, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Maj/Min</Text></TouchableOpacity>
-
+<TouchableOpacity style={{marginTop: 12, }}
+        onPress={()=>{pitchesPressed=[]; console.log(pitchesPressed)}}><Text style={{borderRadius: 10, padding: 8, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Clear</Text></TouchableOpacity>
     </View>
   );
 }
@@ -603,7 +583,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginVertical: 30,
-    height: 1,
-    width: '80%',
+    height: 211,
+    width: '20%',
   },
 });
