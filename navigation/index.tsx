@@ -68,7 +68,7 @@ function BottomTabNavigator() {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Fretboard',
+          title: '',
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="guitar-electric" size={24} color="black" />,
           headerRight: () => (
             <Pressable
@@ -76,12 +76,12 @@ function BottomTabNavigator() {
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
+              {/* <FontAwesome
                 name="info-circle"
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
-              />
+              /> */}
             </Pressable>
           ),
         })}
