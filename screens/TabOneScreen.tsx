@@ -1,15 +1,34 @@
-import { StyleSheet, Image, TouchableOpacity, ImageBackground} from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, ImageBackground, TouchableHighlightComponent} from 'react-native';
 import { Audio } from "expo-av";
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import {useEffect, useState} from 'react'
 import { RootTabScreenProps } from '../types';
 import Fretboard from '../assets/images/fretmax.png';
+import Sound from 'react-native-sound';
 
-// const Fretboard = { uri: "../assets/images/fretmax.png" };
+// if generated is true;
+
+// record button presses, iterate until generatedPitches.length
+
+// if generatedPitches == inputPitches 
+// 	&& inputPitches.length == generatedPitches.length;
+
+// alert('yes')
+
+// check each pitch and give a score. 
+
+// compare iterations, return how many correct and display score. save score to localStorage.
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   let pitchesPressed = [];
+  let generatedPitches = [];
+
+  const [pitchesWTFPressed, setPitchesWTFPressed] = useState(Array)
+
+  const [arePitchesGenerated, setArePitchesGenerated] = useState(Boolean)
+  const [beginningOfPlayback, setBeginningOfPlayback] = useState(generatedPitches?.length)
+
   const [audioFile, setAudioFile] = useState(false);
   const [one, setone] = useState(Boolean)
   const [two, settwo] = useState(false)
@@ -43,9 +62,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   const [a30, set30] = useState(false)
   const [root, setRoot] = useState(true)
 
-  const [rootPitch, setRootPitch] = useState(5)
-
-
+const [rootPitch, setRootPitch] = useState(5) // this is for setting root pitch. see line 293
 
 const [display1, setDisplay1] = useState(1)
 const [display2, setDisplay2] = useState(2)
@@ -286,11 +303,72 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
 
   else{ setScaleSchema("A")}}
 
-const buttonPress = async (param: string) => {
-console.log(param, 'param')
+  const generate = () => {
 
+        generatedPitches = []
+
+        setArePitchesGenerated(true);
+
+        let numberOfPitches = 7;
+
+        for(let i=0; i<numberOfPitches; i++){       
+
+        let myTicket= 
+    Math.floor(Math.random() * 7) + 1;
+    generatedPitches.push(myTicket.toFixed(0))
+        }
+
+        // console.log(typeof(generatedPitches[0]))
+
+        console.log(generatedPitches, "pitches")
+
+
+        for (var i = 0; i <generatedPitches.length; i++) {
+                (function(index) {
+                    setTimeout(function() { console.log(generatedPitches[index]); 
+                        
+                        if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
+                        if(generatedPitches[index]=='4'){generatedPitches[index]='5'}
+                        if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
+                        if(generatedPitches[index]=='10'){generatedPitches[index]='11'}
+
+                        // let myTime= 
+                        // Math.floor(Math.random() * 7) + 1;
+                        // generatedPitches.push(myTime.toFixed(0));
+
+                        // console.log(myTime, 'time');
+                        
+                      
+                        buttonPress(`${generatedPitches[index]}`)}, i * 500);
+                })(i);
+
+                pitchesPressed = [];
+              
+                console.log(generatedPitches, 'gen')
+            }
+
+      
+  }
+
+const buttonPress = async (param: string) => {
+
+console.log('wtf', arePitchesGenerated);
+console.log(param, 'param');
+
+console.log(generatedPitches, 'generated');
+console.log(arePitchesGenerated, 'are they generated?')
+
+if(arePitchesGenerated){
+
+        console.log('whywhywyhwhywhywyhwyhwyhwhywhywhywy')
+        setArePitchesGenerated(true)
+}
+
+if(!arePitchesGenerated){console.log('not generated');
 pitchesPressed.push(param);
-console.log(pitchesPressed)
+}
+
+console.log(pitchesPressed, 'pressed')
 
     // THE IDEA -->>>>>>>>>> to switch keys, define root as a number (1-12) then name audio files "1.wav"-"30.wav", use ${parseInt(root) + num}.wav
     const sound = new Audio.Sound();
@@ -461,9 +539,6 @@ console.log(pitchesPressed)
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" /> */}
 
       { scaleSchema == "A" ?
 
@@ -474,94 +549,109 @@ console.log(pitchesPressed)
 }
 <ImageBackground
   source={Fretboard}
-  style={{height: 600, width: 220, marginTop: -120,}}
+  style={{height: 600, width: 220, marginTop: -120}}
 > 
 
 {/* row 1 */}
-<View  style={{display: "flex", flexDirection: 'row', marginTop: 35, marginLeft: 0, zIndex:220}}>
+<View  style={{flexDirection: 'row', marginTop: 35, marginLeft: 0}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 25 }}
-        onPressIn={()=>{one ? buttonPress('1'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: root1 ? "red" : "teal", padding: 2, opacity: one ? 1 : 0}}>{display1}</Text></TouchableOpacity>
+        onPressIn={()=>{one ? buttonPress('1'): null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: root1 ? "red" : "teal", padding: 2, opacity: one ? 1 : 0}}>{display1}</Text></TouchableOpacity>
+<TouchableOpacity style={{marginLeft: 0, marginRight: 27, zIndex: -222}}
+        onPress={()=>{six ? buttonPress('6'): null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: six ? 1 : 1}}>{display6}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{six ? buttonPress('6'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: six ? 1 : 0}}>{display6}</Text></TouchableOpacity>
-<TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{eleven ? buttonPress('11') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eleven ? 1 : 0}}>{display11}</Text></TouchableOpacity>
+        onPress={()=>{eleven ? buttonPress('11') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eleven ? 1 : 0}}>{display11}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{sixteen ? buttonPress('16') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: sixteen ? 1 : 0}}>{display16}</Text></TouchableOpacity>
+        onPress={()=>{sixteen ? buttonPress('16') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: sixteen ? 1 : 0}}>{display16}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twentyOne ? buttonPress('21'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyOne ? 1 : 0}}>{display21}</Text></TouchableOpacity>
+        onPress={()=>{twentyOne ? buttonPress('21'): null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyOne ? 1 : 0}}>{display21}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 0}}
-        onPress={()=>{a26 ? buttonPress('26'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a26 ? 1 : 0}}>{display26}</Text></TouchableOpacity>
+        onPress={()=>{a26 ? buttonPress('26'): null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a26 ? 1 : 0}}>{display26}</Text></TouchableOpacity>
 </View>
 
 {/* row 2 */}
 <View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 25}}
-        onPress={()=>{two ? buttonPress('2') : null}}><Text style={{backgroundColor: root2 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: two ? 1 : 0}}>{display2}</Text></TouchableOpacity>
+        onPress={()=>{two ? buttonPress('2') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root2 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: two ? 1 : 0}}>{display2}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{seven ? buttonPress('7') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2,opacity: seven ? 1 : 0}}>{display7}</Text></TouchableOpacity>
+        onPress={()=>{seven ? buttonPress('7') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2,opacity: seven ? 1 : 0}}>{display7}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twelve ? buttonPress('12') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twelve ? 1 : 0}}>{display12}</Text></TouchableOpacity>
+        onPress={()=>{twelve ? buttonPress('12') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twelve ? 1 : 0}}>{display12}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{seventeen ? buttonPress('17') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: seventeen ? 1 : 0}}>{display17}</Text></TouchableOpacity>
+        onPress={()=>{seventeen ? buttonPress('17') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: seventeen ? 1 : 0}}>{display17}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twentyTwo ? buttonPress('22') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyTwo ? 1 : 0}}>{display22}</Text></TouchableOpacity>
+        onPress={()=>{twentyTwo ? buttonPress('22') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyTwo ? 1 : 0}}>{display22}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 0}}
-        onPress={()=>{a27 ? buttonPress('27') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a27 ? 1 : 0}}>{display27}</Text></TouchableOpacity>
+        onPress={()=>{a27 ? buttonPress('27') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a27 ? 1 : 0}}>{display27}</Text></TouchableOpacity>
 </View>
 
 {/* row 3 */}
 <View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 25}}
-        onPress={()=>{three ? buttonPress('3') : null}}><Text style={{backgroundColor: root3 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: three ? 1 : 0}}>{display3}</Text></TouchableOpacity>
+        onPress={()=>{three ? buttonPress('3') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root3 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: three ? 1 : 0}}>{display3}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{eight ? buttonPress('8') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eight ? 1 : 0}}>{display8}</Text></TouchableOpacity>
+        onPress={()=>{eight ? buttonPress('8') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eight ? 1 : 0}}>{display8}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{thirteen ? buttonPress('13') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: thirteen ? 1 : 0}}>{display13}</Text></TouchableOpacity>
+        onPress={()=>{thirteen ? buttonPress('13') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: thirteen ? 1 : 0}}>{display13}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{eighteen ? buttonPress('18') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eighteen ? 1 : 0}}>{display18}</Text></TouchableOpacity>
+        onPress={()=>{eighteen ? buttonPress('18') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: eighteen ? 1 : 0}}>{display18}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twentyThree ? buttonPress('23') :null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyThree ? 1 : 0}}>{display23}</Text></TouchableOpacity>
+        onPress={()=>{twentyThree ? buttonPress('23') :null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyThree ? 1 : 0}}>{display23}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{a28 ? buttonPress('28') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a28 ? 1 : 0}}>{display28}</Text></TouchableOpacity>
+        onPress={()=>{a28 ? buttonPress('28') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a28 ? 1 : 0}}>{display28}</Text></TouchableOpacity>
 </View>
 
 {/* row 4 */}
 <View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{four ? buttonPress('4') : null}}><Text style={{backgroundColor: root4 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: four ? 1 : 0}}>{display4}</Text></TouchableOpacity>
+        onPress={()=>{four ? buttonPress('4') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root4 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: four ? 1 : 0}}>{display4}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{nine ? buttonPress('9') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nine ? 1 : 0}}>{display9}</Text></TouchableOpacity>
+        onPress={()=>{nine ? buttonPress('9') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nine ? 1 : 0}}>{display9}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{fourteen ? buttonPress('14') :null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fourteen ? 1 : 0}}>{display14}</Text></TouchableOpacity>
+        onPress={()=>{fourteen ? buttonPress('14') :null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fourteen ? 1 : 0}}>{display14}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{nineteen ? buttonPress('19') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nineteen ? 1 : 0}}>{display19}</Text></TouchableOpacity>
+        onPress={()=>{nineteen ? buttonPress('19') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nineteen ? 1 : 0}}>{display19}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twentyFour ? buttonPress('24') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFour ? 1 : 0}}>{display24}</Text></TouchableOpacity>
+        onPress={()=>{twentyFour ? buttonPress('24') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFour ? 1 : 0}}>{display24}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 0, display: a29 ? "flex" : 'none'}}
-        onPress={()=>{a29 ? buttonPress('29'): null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a29 ? 1 : 0}}>{display29}</Text></TouchableOpacity>
+        onPress={()=>{a29 ? buttonPress('29'): null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a29 ? 1 : 0}}>{display29}</Text></TouchableOpacity>
 </View>
 
 {/* row 5 */}
 <View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{five ? buttonPress('5') : null}}><Text style={{backgroundColor: root5 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: five ? 1 : 0}}>{display5}</Text></TouchableOpacity>
+        onPress={()=>{five ? buttonPress('5') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root5 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: five ? 1 : 0}}>{display5}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{ten ? buttonPress('10') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: ten ? 1 : 0}}>{display10}</Text></TouchableOpacity>
+        onPress={()=>{ten ? buttonPress('10') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: ten ? 1 : 0}}>{display10}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{fifteen ? buttonPress('15') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fifteen ? 1 : 0 }}>{display15}</Text></TouchableOpacity>
+        onPress={()=>{fifteen ? buttonPress('15') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fifteen ? 1 : 0 }}>{display15}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twenty ? buttonPress('20') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twenty ? 1 : 0}}>{display20}</Text></TouchableOpacity>
+        onPress={()=>{twenty ? buttonPress('20') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twenty ? 1 : 0}}>{display20}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twentyFive ? buttonPress('25') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFive ? 1 : 0}}>{display25}</Text></TouchableOpacity>
+        onPress={()=>{twentyFive ? buttonPress('25') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFive ? 1 : 0}}>{display25}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{ a30 ? buttonPress('30') : null}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a30 ? 1 : 0}}>{display30}</Text></TouchableOpacity>
+        onPress={()=>{ a30 ? buttonPress('30') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a30 ? 1 : 0}}>{display30}</Text></TouchableOpacity>
 </View>
 </ImageBackground>
+<View style={{display: 'flex', flexDirection: 'row', marginTop: -48}}>
+        
+        <TouchableOpacity style={{}}
+        onPress={()=>{checkScaleSchema()}}>
+                <Text style={{borderRadius: 10, marginRight: 5,padding: 8, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Maj/Min</Text>
+                </TouchableOpacity>
 
-<TouchableOpacity style={{marginTop: -22, marginLeft: 10, marginRight: 12}}
-        onPress={()=>{checkScaleSchema()}}><Text style={{borderRadius: 10, padding: 8, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Maj/Min</Text></TouchableOpacity>
-<TouchableOpacity style={{marginTop: 12, }}
-        onPress={()=>{pitchesPressed=[]; console.log(pitchesPressed)}}><Text style={{borderRadius: 10, padding: 8, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Clear</Text></TouchableOpacity>
+                <TouchableOpacity style={{ }}
+        onPress={()=>{pitchesPressed=[]; console.log(pitchesPressed)}}>
+                <Text style={{borderRadius: 10, padding: 8, textAlign: 'center',  marginRight: 5, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Clear</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{ }}
+        onPress={()=>{generate()}}>
+                <Text style={{borderRadius: 10, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Generate</Text>
+                </TouchableOpacity>
+
+                
+                </View>
+
     </View>
   );
 }
