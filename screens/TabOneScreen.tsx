@@ -534,6 +534,12 @@ console.log(pitchesPressed, 'pressed')
         }
 
         await sound.playAsync();
+
+        console.log(pitchesPressed.length, "pressed length")
+        console.log(generatedPitches.length, "generated length")
+
+        if(pitchesPressed.length==generatedPitches.length){alert('length reached')}
+
 }
 
   return (
