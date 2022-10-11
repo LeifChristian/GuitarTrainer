@@ -309,7 +309,6 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
 
         generatedPitches = []
 
-        isItGenerated = true;
 
         let numberOfPitches = 7;
 
@@ -343,28 +342,28 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
                         buttonPress(`${generatedPitches[index]}`)}, i * 500);
                 })(i);
 
-                pitchesPressed = [];
+        
               
-                console.log(generatedPitches, 'gen')
+                console.log(generatedPitches, 'gen');
+               
             }
 
-      
+      isItGenerated = true;
   }
 
 const buttonPress = async (param: string) => {
 
-console.log(param, 'param');
+console.log("buttonPress", param);
 
 console.log(generatedPitches, 'generated');
 
 if(isItGenerated){
         console.log('it is pressed')
-   
 }
 
 if(!isItGenerated){console.log('not generated');
-pitchesPressed.push(param);
 
+pitchesPressed.push(param);
 }
 
 console.log(pitchesPressed, 'pressed')
@@ -538,7 +537,30 @@ console.log(pitchesPressed, 'pressed')
         console.log(pitchesPressed.length, "pressed length")
         console.log(generatedPitches.length, "generated length")
 
-        if(pitchesPressed.length==generatedPitches.length){alert('length reached')}
+        if(pitchesPressed.length==generatedPitches.length){alert('length reached');
+        let arrayOfCorrectAnswers=[];
+
+        for (let x = 0; x < generatedPitches.length; x++) {
+                if (
+                  generatedPitches[x] == pitchesPressed[x]
+                 
+                ) {
+                  arrayOfCorrectAnswers.push(true)
+        
+                  // localStorage.setItem("items", JSON.stringify(items));
+                }
+
+                else{arrayOfCorrectAnswers.push(false)}
+               
+              }
+              console.log(arrayOfCorrectAnswers);
+              arrayOfCorrectAnswers=[];
+
+
+}
+
+
+
 
 }
 
@@ -608,33 +630,33 @@ console.log(pitchesPressed, 'pressed')
 {/* row 4 */}
 <View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{four ? buttonPress('4') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root4 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: four ? 1 : 0}}>{display4}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; four ? buttonPress('4') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root4 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: four ? 1 : 0}}>{display4}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{nine ? buttonPress('9') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nine ? 1 : 0}}>{display9}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; nine ? buttonPress('9') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nine ? 1 : 0}}>{display9}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{fourteen ? buttonPress('14') :null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fourteen ? 1 : 0}}>{display14}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; fourteen ? buttonPress('14') :null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fourteen ? 1 : 0}}>{display14}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{nineteen ? buttonPress('19') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nineteen ? 1 : 0}}>{display19}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; nineteen ? buttonPress('19') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: nineteen ? 1 : 0}}>{display19}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twentyFour ? buttonPress('24') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFour ? 1 : 0}}>{display24}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; twentyFour ? buttonPress('24') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFour ? 1 : 0}}>{display24}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 0, display: a29 ? "flex" : 'none'}}
-        onPress={()=>{a29 ? buttonPress('29'): null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a29 ? 1 : 0}}>{display29}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; a29 ? buttonPress('29'): null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a29 ? 1 : 0}}>{display29}</Text></TouchableOpacity>
 </View>
 
 {/* row 5 */}
 <View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:69, zIndex:220}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{five ? buttonPress('5') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root5 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: five ? 1 : 0}}>{display5}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; five ? buttonPress('5') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root5 ? "red" : "teal", fontSize: 19, fontWeight: "900", padding: 2, opacity: five ? 1 : 0}}>{display5}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{ten ? buttonPress('10') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: ten ? 1 : 0}}>{display10}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; ten ? buttonPress('10') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: ten ? 1 : 0}}>{display10}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{fifteen ? buttonPress('15') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fifteen ? 1 : 0 }}>{display15}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; fifteen ? buttonPress('15') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: fifteen ? 1 : 0 }}>{display15}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twenty ? buttonPress('20') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twenty ? 1 : 0}}>{display20}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; twenty ? buttonPress('20') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twenty ? 1 : 0}}>{display20}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{twentyFive ? buttonPress('25') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFive ? 1 : 0}}>{display25}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; twentyFive ? buttonPress('25') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: twentyFive ? 1 : 0}}>{display25}</Text></TouchableOpacity>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 27}}
-        onPress={()=>{ a30 ? buttonPress('30') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a30 ? 1 : 0}}>{display30}</Text></TouchableOpacity>
+        onPress={()=>{isItGenerated = false; a30 ? buttonPress('30') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: 'teal', padding: 2, opacity: a30 ? 1 : 0}}>{display30}</Text></TouchableOpacity>
 </View>
 </ImageBackground>
 <View style={{display: 'flex', flexDirection: 'row', marginTop: -48}}>
