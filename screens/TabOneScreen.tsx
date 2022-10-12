@@ -114,7 +114,7 @@ console.log('useEffect returning...')
 
   switch(scaleSchema){
 
-    case 'Ab': console.log('Ab');
+    case 'AbMaj': console.log('Ab');
     
     break;
 
@@ -329,6 +329,7 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
                 (function(index) {
                     setTimeout(function() { console.log(generatedPitches[index]); 
                         
+                        generatedPitches[0]= '1'; // force first pitch to root.
                         if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
                         if(generatedPitches[index]=='4'){generatedPitches[index]='5'}
                         if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
@@ -336,12 +337,10 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
                         if(generatedPitches[index]=='11'){generatedPitches[index]='12'}
 
                         // let myTime= 
-                        // Math.floor(Math.random() * 7) + 1;
+                        // Math.floor(Math.random() * 7) + 1;r
                         // generatedPitches.push(myTime.toFixed(0));
-
                         // console.log(myTime, 'time');
                         
-                      
                         buttonPress(`${generatedPitches[index]}`)}, i * 500);
                 })(i);
 
@@ -352,6 +351,29 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
             }
 
       isItGenerated = true;
+  }
+
+  const repeat = () => {
+
+        for (var i = 0; i <generatedPitches.length; i++) {
+                (function(index) {
+                    setTimeout(function() { console.log(generatedPitches[index]); 
+                        
+
+                        // let myTime= 
+                        // Math.floor(Math.random() * 7) + 1;r
+                        // generatedPitches.push(myTime.toFixed(0));
+                        // console.log(myTime, 'time');
+                        
+                        buttonPress(`${generatedPitches[index]}`)}, i * 500);
+                })(i);
+
+        
+                console.log(generatedPitches, 'gen');
+               
+            }
+
+      
   }
 
 const buttonPress = async (param: string) => {
@@ -674,13 +696,18 @@ console.log(pitchesPressed, 'pressed')
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{ }}
-        onPress={()=>{pitchesPressed=[]; console.log(pitchesPressed)}}>
+        onPress={()=>{pitchesPressed=[]; console.log(pitchesPressed); generatedPitches=[]}}>
                 <Text style={{borderRadius: 10, padding: 8, textAlign: 'center',  marginRight: 5, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Clear</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{ }}
         onPress={()=>{generate()}}>
-                <Text style={{borderRadius: 10, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", borderRadius: 10, backgroundColor: 'teal'}}>Generate</Text>
+                <Text style={{borderRadius: 10, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Generate</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{ }}
+        onPress={()=>{console.log(generatedPitches, 'working?'); repeat()}}>
+                <Text style={{borderRadius: 10, marginLeft: 5, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>🔃</Text>
                 </TouchableOpacity>
 
                 
