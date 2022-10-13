@@ -311,7 +311,6 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
 
         let rangeOfPitches = 13;
 
-
         let numberOfPitches = 7;
 
         for(let i=0; i<numberOfPitches; i++){       
@@ -328,13 +327,26 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
         for (var i = 0; i <generatedPitches.length; i++) {
                 (function(index) {
                     setTimeout(function() { console.log(generatedPitches[index]); 
+
+
+                        if(scaleSchema == 'A'){
                         
                         generatedPitches[0]= '1'; // force first pitch to root.
                         if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
                         if(generatedPitches[index]=='4'){generatedPitches[index]='5'}
                         if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
                         if(generatedPitches[index]=='9'){generatedPitches[index]='10'}
-                        if(generatedPitches[index]=='11'){generatedPitches[index]='12'}
+                        if(generatedPitches[index]=='11'){generatedPitches[index]='12'}}
+
+                        if(scaleSchema=="Amin"){
+                                generatedPitches[0]= '1'; 
+                                if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
+                                if(generatedPitches[index]=='5'){generatedPitches[index]='4'}
+                                if(generatedPitches[index]=='7'){generatedPitches[index]='8'}
+                                if(generatedPitches[index]=='10'){generatedPitches[index]='9'}
+                                if(generatedPitches[index]=='12'){generatedPitches[index]='11'}
+
+                        }
 
                         // let myTime= 
                         // Math.floor(Math.random() * 7) + 1;r
@@ -344,8 +356,6 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
                         buttonPress(`${generatedPitches[index]}`)}, i * 500);
                 })(i);
 
-        
-              
                 console.log(generatedPitches, 'gen');
                
             }
@@ -373,7 +383,6 @@ if(scaleSchema=="A"){setScaleSchema('Amin')}
                
             }
 
-      
   }
 
 const buttonPress = async (param: string) => {
@@ -460,7 +469,6 @@ console.log(pitchesPressed, 'pressed')
                         await sound.unloadAsync();
                         await sound.loadAsync(require(`../assets/audio/ab1.wav`));
                         
-
                 break;
                 case "13":
                         await sound.unloadAsync();
@@ -554,13 +562,11 @@ console.log(pitchesPressed, 'pressed')
                         
                 break;
               
-
         }
 
         await sound.playAsync();
         setTimeout(async ()=>{await sound.unloadAsync()}, 1000)
         
-
         console.log(pitchesPressed.length, "pressed length", generatedPitches.length, "generated length");
 
         if(pitchesPressed.length==generatedPitches.length){
@@ -581,14 +587,18 @@ console.log(pitchesPressed, 'pressed')
                
               }
               console.log(arrayOfCorrectAnswers);
-              alert(arrayOfCorrectAnswers.toString())
+
+              let theNumberCorrect = 0
+              
+              arrayOfCorrectAnswers.forEach(item=>item==true ? theNumberCorrect++ : null)
+
+              alert(theNumberCorrect + " out of 7 - " + arrayOfCorrectAnswers.toString())
+
               arrayOfCorrectAnswers=[];
               pitchesPressed = [];
-
+              generatedPitches=[]
 
 }
-
-
 
 
 }
@@ -697,19 +707,19 @@ console.log(pitchesPressed, 'pressed')
 
                 <TouchableOpacity style={{ }}
         onPress={()=>{pitchesPressed=[]; console.log(pitchesPressed); generatedPitches=[]}}>
-                <Text style={{borderRadius: 10, padding: 8, textAlign: 'center',  marginRight: 5, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Clear</Text>
+                <Text style={{borderRadius: 10, padding: 8, textAlign: 'center', display: 'none', marginRight: 5, fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Clear</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={{ }}
+        onPress={()=>{console.log(generatedPitches, 'working?'); repeat()}}>
+                <Text style={{borderRadius: 10, marginLeft: 5, marginRight: 9, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>🔃</Text>
+                </TouchableOpacity>
+
 
                 <TouchableOpacity style={{ }}
         onPress={()=>{generate()}}>
                 <Text style={{borderRadius: 10, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>Generate</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity style={{ }}
-        onPress={()=>{console.log(generatedPitches, 'working?'); repeat()}}>
-                <Text style={{borderRadius: 10, marginLeft: 5, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", backgroundColor: 'teal'}}>🔃</Text>
-                </TouchableOpacity>
-
                 
                 </View>
 
