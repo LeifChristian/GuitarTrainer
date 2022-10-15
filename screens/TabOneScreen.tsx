@@ -1,4 +1,4 @@
-import { StyleSheet, Image, TouchableOpacity, ImageBackground, TouchableHighlightComponent} from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, ImageBackground, TouchableHighlightComponent, Platform} from 'react-native';
 import { Audio } from "expo-av";
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -20,6 +20,58 @@ import { def } from '@vue/shared';
 // check each pitch and give a score. 
 
 // compare iterations, return how many correct and display score. save score to localStorage.
+
+
+let styles;
+
+if (Platform.OS === 'web') {
+
+        styles = StyleSheet.create({
+                container: {
+                  marginTop: -62,
+                  zIndex: 2000,
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor:'white'
+                },
+              
+                button:{marginLeft: 10, marginRight: 12},
+                buttonText: {fontSize: 19, fontWeight: "900", borderRadius: 10, backgroundColor: 'dodgerblue', padding: 2},
+                title: {
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                },
+                separator: {
+                  marginVertical: 30,
+                  height: 211,
+                  width: '20%',
+                },
+              });}
+
+              if(Platform.OS!=='web') {
+styles = StyleSheet.create({
+  container: {
+    marginTop: -62,
+    zIndex: 2000,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  button:{marginLeft: 10, marginRight: 12},
+  buttonText: {fontSize: 19, fontWeight: "900", borderRadius: 10, backgroundColor: 'dodgerblue', padding: 2},
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  separator: {
+    marginVertical: 30,
+    height: 211,
+    width: '20%',
+  },
+});
+              }
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
@@ -480,7 +532,6 @@ if(isItMinor){setScaleSchema("Amin")}
                         buttonPress(`${generatedPitches[index]}`)}, i * 500);
                 })(i);
 
-        
                 console.log(generatedPitches, 'gen');
                
             }
@@ -806,7 +857,7 @@ switch(parameter){
 > 
 
 {/* row 1 */}
-<View  style={{flexDirection: 'row', marginTop: 35, marginLeft: 0,}}>
+<View  style={{flexDirection: 'row', marginTop: 35, marginLeft: 0, backgroundColor: 'white'}}>
         <TouchableOpacity style={{marginLeft: 1, marginRight: 18 }}
         onPressIn={()=>{isItGenerated = false; one ? buttonPress('1'): null; }}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: root1 ? "red" : "dodgerblue", padding: 8, borderRadius: 10, opacity: one ? 1 : 0}}>{display1}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 17}}
@@ -822,7 +873,7 @@ switch(parameter){
 </View>
 
 {/* row 2 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:65, zIndex:220}}>
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:65, zIndex:220, backgroundColor: 'white'}}>
         <TouchableOpacity style={{marginLeft: 1, marginRight: 18}}
         onPress={()=>{isItGenerated = false; two ? buttonPress('2') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root2 ? "red" : "dodgerblue", fontSize: 19, fontWeight: "900", padding: 8, opacity: two ? 1 : 0}}>{display2}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 17}}
@@ -838,7 +889,7 @@ switch(parameter){
 </View>
 
 {/* row 3 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:65, zIndex:220}}>
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:65, zIndex:220, backgroundColor: 'white'}}>
         <TouchableOpacity style={{marginLeft: 1, marginRight: 18}}
         onPress={()=>{isItGenerated = false; three ? buttonPress('3') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root3 ? "red" : "dodgerblue", borderRadius: 10, fontSize: 19, fontWeight: "900", padding: 8, opacity: three ? 1 : 0}}>{display3}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 17}}
@@ -854,7 +905,7 @@ switch(parameter){
 </View>
 
 {/* row 4 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:65, zIndex:220}}>
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:65, zIndex:220, backgroundColor: 'white'}}>
         <TouchableOpacity style={{marginLeft: 1, marginRight: 18}}
         onPress={()=>{isItGenerated = false; four ? buttonPress('4') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root4 ? "red" : "dodgerblue", borderRadius: 10, fontSize: 19, fontWeight: "900", padding: 8, opacity: four ? 1 : 0}}>{display4}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 17}}
@@ -870,7 +921,7 @@ switch(parameter){
 </View>
 
 {/* row 5 */}
-<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:57, zIndex:220}}>
+<View  style={{display: "flex", flexDirection: 'row', marginLeft: 0, marginTop:57, zIndex:220, backgroundColor: 'white'}}>
         <TouchableOpacity style={{marginLeft: 0, marginRight: 18}}
         onPress={()=>{isItGenerated = false; five ? buttonPress('5') : null; setArePitchesGenerated(false)}}><Text style={{backgroundColor: root5 ? "red" : "dodgerblue", borderRadius: 10, fontSize: 19, fontWeight: "900", padding: 8, opacity: five ? 1 : 0}}>{display5}</Text></TouchableOpacity>
 <TouchableOpacity style={{marginLeft: 0, marginRight: 17}}
@@ -885,7 +936,7 @@ switch(parameter){
         onPress={()=>{isItGenerated = false; a30 ? buttonPress('30') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", borderRadius: 10, backgroundColor: 'dodgerblue', padding: 8, opacity: a30 ? 1 : 0}}>{display30}</Text></TouchableOpacity>
 </View>
 </ImageBackground>
-<View style={{display: 'flex', flexDirection: 'row', marginTop: -48}}>
+<View style={{display: 'flex', flexDirection: 'row', marginTop: -48 , backgroundColor: 'white'}}>
 
 <TouchableOpacity style={{ }}
         onPress={()=>{ if(currentKeyNumber>0) { let wtf = currentKeyNumber -1;  setCurrentKeyNumber(currentKeyNumber-1); checkScale(wtf)}}}>
@@ -923,24 +974,4 @@ switch(parameter){
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: -62,
-    zIndex: 2000,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 
-  button:{marginLeft: 10, marginRight: 12},
-  buttonText: {fontSize: 19, fontWeight: "900", borderRadius: 10, backgroundColor: 'dodgerblue', padding: 2},
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 211,
-    width: '20%',
-  },
-});
