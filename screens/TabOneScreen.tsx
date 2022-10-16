@@ -9,18 +9,12 @@ import Sound from 'react-native-sound';
 import { def } from '@vue/shared';
 
 // if generated is true;
-
 // record button presses, iterate until generatedPitches.length
-
 // if generatedPitches == inputPitches 
 // 	&& inputPitches.length == generatedPitches.length;
-
 // alert('yes')
-
 // check each pitch and give a score. 
-
 // compare iterations, return how many correct and display score. save score to localStorage.
-
 
 let styles;
 
@@ -33,7 +27,8 @@ if (Platform.OS === 'web') {
                   flex: 1,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor:'white'
+                  backgroundColor:'white',
+                  color: 'black'
                 },
               
                 button:{marginLeft: 10, marginRight: 12},
@@ -45,12 +40,13 @@ if (Platform.OS === 'web') {
                 separator: {
                   marginVertical: 30,
                   height: 211,
+                  backgroundColor: 'white',
                   width: '20%',
                 },
               });}
 
               if(Platform.OS!=='web') {
-styles = StyleSheet.create({
+                styles = StyleSheet.create({
   container: {
     marginTop: -62,
     zIndex: 2000,
@@ -70,7 +66,7 @@ styles = StyleSheet.create({
     height: 211,
     width: '20%',
   },
-});
+                });
               }
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
@@ -79,14 +75,12 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   let generatedPitches = [];
   let isItGenerated = false;
 
-  const [pitchesWTFPressed, setPitchesWTFPressed] = useState(Array)
   const [arePitchesGenerated, setArePitchesGenerated] = useState(Boolean)
   const [beginningOfPlayback, setBeginningOfPlayback] = useState(generatedPitches?.length)
 
   const [currentKey, setCurrentKey] = useState('A');
-const[currentKeyNumber, setCurrentKeyNumber] = useState(10);
-
-
+  const [position, setPosition] = useState(5);
+  const [currentKeyNumber, setCurrentKeyNumber] = useState(10);
   const [isItMinor, setIsItMinor] = useState(true);
   const [natHarm, setNatHarm] = useState('nat')
   const [audioFile, setAudioFile] = useState(false);
@@ -122,7 +116,7 @@ const[currentKeyNumber, setCurrentKeyNumber] = useState(10);
   const [a30, set30] = useState(false)
   const [root, setRoot] = useState(true)
 
-const [rootPitch, setRootPitch] = useState(5) // this is for setting root pitch. see line 293
+const [rootPitch, setRootPitch] = useState(5) // this is for setting root pitch, currently unused
 
 const [display1, setDisplay1] = useState(1)
 const [display2, setDisplay2] = useState(2)
@@ -163,275 +157,1128 @@ const [root3, setRoot3] = useState(false);
 const [root4, setRoot4] = useState(false);
 const [root5, setRoot5] = useState(false);
 
-const[scaleSchema, setScaleSchema]= useState("A");
+const[scaleSchema, setScaleSchema]= useState("Major");
 
   useEffect(() => { 
 console.log('useEffect returning...')
   
   }, [one])
 
-  switch(scaleSchema){
 
-    case 'AbMaj': console.log('Ab');
+//   if(position==1){};
+//   if(position==2){};
+//   if(position==3){};
+//   if(position==4){};
+
+if(position==1){switch(scaleSchema){
+
+        case 'Major': 
     
-    break;
-
-    case 'A': 
-
-    console.log('A major')
-if(!one)
-{
-    setRoot1(true)  
-    setone(true);
-    settwo(false);
-    setthree(true);
-    setfour(false);
-    setfive(true);
-    setsix(true);
-    setseven(false);
-    seteight(true);
-    setnine(false);
-    setten(true);
-    seteleven(false);
-    settwelve(true);
-    setthirteen(true);
-    setfourteen(false);
-    setfifteen(true);
-    setsixteen(false);
-    setseventeen(true);
-    seteighteen(true);
-    setnineteen(false);
-    settwenty(true);
-    settwentyone(false);
-    settwentytwo(false);
-    settwentythree(true);
-    settwentyfour(false);
-    set25(true);
-    set26(true);
-    set27(false);
-    set28(true);
-    set29(false);
-    set30(true);
-
-    setDisplay1(1)
-    setDisplay2(0)
-    setDisplay3(2)
-    setDisplay4(0)
-    setDisplay5(3)
-    setDisplay6(4)
-    setDisplay7(0)
-    setDisplay8(5)
-    setDisplay9(7)
-    setDisplay10(6)
-    setDisplay11(6)
-    setDisplay12(7)
-    setDisplay13(1)
-    setDisplay14(0)
-    setDisplay15(2)
-    setDisplay16(0)
-    setDisplay17(3)
-    setDisplay18(4)
-    setDisplay19(0)
-    setDisplay20(5)
-    setDisplay21(0)
-    setDisplay22(0)
-    setDisplay23(6)
-    setDisplay24(3)
-    setDisplay25(7)
-    setDisplay26(1)
-    setDisplay27(2)
-    setDisplay28(2)
-    setDisplay29(7)
-    setDisplay30(3)
-
-}
-    break;
-
-    case 'Amin': console.log('b');
-
-    console.log('A minor')
+        console.log('Major 1st')
     if(!one)
     {
-        setRoot1(true)
+        setRoot1(true)  
         setone(true);
         settwo(false);
         setthree(true);
-        setfour(true);
-        setfive(false);
+        setfour(false);
+        setfive(true);
         setsix(true);
         setseven(false);
         seteight(true);
-        setnine(true);
-        setten(false);
-        seteleven(true);
-        settwelve(false);
-        setthirteen(true);
-        setfourteen(false);
-        setfifteen(true);
-        setsixteen(true);
-        setseventeen(false);
-        seteighteen(true);
-        setnineteen(false);
-        settwenty(true);
-        settwentyone(true);
-        settwentytwo(true);
-        settwentythree(false);
-        settwentyfour(true);
-        set25(false);
-        set26(true);
-        set27(false);
-        set28(true);
-        set29(true);
-        set30(false);
-
-        setDisplay1(1)
-        setDisplay2(0) //
-        setDisplay3(2)
-        setDisplay4(3)
-        setDisplay5(0) //
-        setDisplay6(4)
-        setDisplay7(0) //
-        setDisplay8(5)
-        setDisplay9(6)
-        setDisplay10(0) //
-        setDisplay11(7)
-        setDisplay12(7) 
-        setDisplay13(1)
-        setDisplay14(0)
-        setDisplay15(2)
-        setDisplay16(3)
-        setDisplay17(0)
-        setDisplay18(4)
-        setDisplay19(0)
-        setDisplay20(5)
-        setDisplay21(5)
-        setDisplay22(6)
-        setDisplay23(0)
-        setDisplay24(7)
-        setDisplay25(0)
-        setDisplay26(1)
-        setDisplay27(0)
-        setDisplay28(2)
-        setDisplay29(3)
-        setDisplay30(0)
-
-    }
-
-    break;
-
-    case 'AminHarm': 
-    console.log('A harm you cunt')
-
-    if(!one)
-    {
-        setRoot1(true)
-        setone(true);
-        settwo(false);
-        setthree(true);
-        setfour(true);
-        setfive(false);
-        setsix(true);
-        setseven(false);
-        seteight(true);
-        setnine(true);
-        setten(false);
+        setnine(false);
+        setten(true);
         seteleven(false);
         settwelve(true);
         setthirteen(true);
         setfourteen(false);
         setfifteen(true);
-        setsixteen(true);
-        setseventeen(false);
+        setsixteen(false);
+        setseventeen(true);
         seteighteen(true);
         setnineteen(false);
         settwenty(true);
-        settwentyone(true);
-        settwentytwo(true);
-        settwentythree(false);
+        settwentyone(false);
+        settwentytwo(false);
+        settwentythree(true);
         settwentyfour(false);
         set25(true);
         set26(true);
         set27(false);
         set28(true);
-        set29(true);
-        set30(false);
-
-
+        set29(false);
+        set30(true);
+    
         setDisplay1(1)
-        setDisplay2(0) //
+        setDisplay2(0)
         setDisplay3(2)
-        setDisplay4(3)
-        setDisplay5(0) //
+        setDisplay4(0)
+        setDisplay5(3)
         setDisplay6(4)
-        setDisplay7(0) //
+        setDisplay7(0)
         setDisplay8(5)
-        setDisplay9(6)
-        setDisplay10(0) //
-        setDisplay11(7)
+        setDisplay9(7)
+        setDisplay10(6)
+        setDisplay11(6)
         setDisplay12(7)
         setDisplay13(1)
         setDisplay14(0)
         setDisplay15(2)
-        setDisplay16(3)
-        setDisplay17(0)
+        setDisplay16(0)
+        setDisplay17(3)
         setDisplay18(4)
         setDisplay19(0)
         setDisplay20(5)
-        setDisplay21(5)
-        setDisplay22(6)
-        setDisplay23(0)
-        setDisplay24(7)
+        setDisplay21(0)
+        setDisplay22(0)
+        setDisplay23(6)
+        setDisplay24(3)
         setDisplay25(7)
         setDisplay26(1)
-        setDisplay27(0)
+        setDisplay27(2)
         setDisplay28(2)
-        setDisplay29(3)
-        setDisplay30(0)
-
+        setDisplay29(7)
+        setDisplay30(3)
+    
     }
-    break;
-
-    case 'C': console.log('c');
+        break;
     
-    break;
-
-    case 'Db': console.log('Db');
+        case 'Minor': console.log('b');
     
-    break;
-
-    case 'D': console.log('D');
+        console.log('Minor')
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(true);
+            settwelve(false);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(true);
+            set25(false);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
     
-    break;
-
-    case 'Eb': console.log('Eb');
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7) 
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(0)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
     
-    break;
-
-    case 'E': console.log('E');
+        }
     
-    break;
-
-    case 'F': console.log('F');
+        break;
     
-    break;
-
-    case 'F#': console.log('F#');
+        case 'HarmMinor': 
+        console.log('A harm')
     
-    break;
-
-    case 'G': console.log('G');
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(false);
+            settwelve(true);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(false);
+            set25(true);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
     
-    break;
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7)
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(7)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+        break;
+    
+        default: console.log('none')
+    
+      }};
 
-    default: console.log('none')
 
-  }
+if(position==2){switch(scaleSchema){
+
+        case 'Major': 
+    
+        console.log('Major 2nd')
+    if(!one)
+    {
+        setRoot1(true)  
+        setone(true);
+        settwo(false);
+        setthree(true);
+        setfour(false);
+        setfive(true);
+        setsix(true);
+        setseven(false);
+        seteight(true);
+        setnine(false);
+        setten(true);
+        seteleven(false);
+        settwelve(true);
+        setthirteen(true);
+        setfourteen(false);
+        setfifteen(true);
+        setsixteen(false);
+        setseventeen(true);
+        seteighteen(true);
+        setnineteen(false);
+        settwenty(true);
+        settwentyone(false);
+        settwentytwo(false);
+        settwentythree(true);
+        settwentyfour(false);
+        set25(true);
+        set26(true);
+        set27(false);
+        set28(true);
+        set29(false);
+        set30(true);
+    
+        setDisplay1(1)
+        setDisplay2(0)
+        setDisplay3(2)
+        setDisplay4(0)
+        setDisplay5(3)
+        setDisplay6(4)
+        setDisplay7(0)
+        setDisplay8(5)
+        setDisplay9(7)
+        setDisplay10(6)
+        setDisplay11(6)
+        setDisplay12(7)
+        setDisplay13(1)
+        setDisplay14(0)
+        setDisplay15(2)
+        setDisplay16(0)
+        setDisplay17(3)
+        setDisplay18(4)
+        setDisplay19(0)
+        setDisplay20(5)
+        setDisplay21(0)
+        setDisplay22(0)
+        setDisplay23(6)
+        setDisplay24(3)
+        setDisplay25(7)
+        setDisplay26(1)
+        setDisplay27(2)
+        setDisplay28(2)
+        setDisplay29(7)
+        setDisplay30(3)
+    
+    }
+        break;
+    
+        case 'Minor': console.log('b');
+    
+        console.log('Minor')
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(true);
+            settwelve(false);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(true);
+            set25(false);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7) 
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(0)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+    
+        break;
+    
+        case 'HarmMinor': 
+        console.log('A harm')
+    
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(false);
+            settwelve(true);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(false);
+            set25(true);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7)
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(7)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+        break;
+    
+        default: console.log('none')
+    
+      }};
+
+
+
+if(position==3){switch(scaleSchema){
+
+        case 'Major': 
+    
+        console.log('Major 3rd')
+    if(!one)
+    {
+        setRoot1(true)  
+        setone(true);
+        settwo(false);
+        setthree(true);
+        setfour(false);
+        setfive(true);
+        setsix(true);
+        setseven(false);
+        seteight(true);
+        setnine(false);
+        setten(true);
+        seteleven(false);
+        settwelve(true);
+        setthirteen(true);
+        setfourteen(false);
+        setfifteen(true);
+        setsixteen(false);
+        setseventeen(true);
+        seteighteen(true);
+        setnineteen(false);
+        settwenty(true);
+        settwentyone(false);
+        settwentytwo(false);
+        settwentythree(true);
+        settwentyfour(false);
+        set25(true);
+        set26(true);
+        set27(false);
+        set28(true);
+        set29(false);
+        set30(true);
+    
+        setDisplay1(1)
+        setDisplay2(0)
+        setDisplay3(2)
+        setDisplay4(0)
+        setDisplay5(3)
+        setDisplay6(4)
+        setDisplay7(0)
+        setDisplay8(5)
+        setDisplay9(7)
+        setDisplay10(6)
+        setDisplay11(6)
+        setDisplay12(7)
+        setDisplay13(1)
+        setDisplay14(0)
+        setDisplay15(2)
+        setDisplay16(0)
+        setDisplay17(3)
+        setDisplay18(4)
+        setDisplay19(0)
+        setDisplay20(5)
+        setDisplay21(0)
+        setDisplay22(0)
+        setDisplay23(6)
+        setDisplay24(3)
+        setDisplay25(7)
+        setDisplay26(1)
+        setDisplay27(2)
+        setDisplay28(2)
+        setDisplay29(7)
+        setDisplay30(3)
+    
+    }
+        break;
+    
+        case 'Minor': console.log('b');
+    
+        console.log('Minor')
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(true);
+            settwelve(false);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(true);
+            set25(false);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7) 
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(0)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+    
+        break;
+    
+        case 'HarmMinor': 
+        console.log('A harm you cunt')
+    
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(false);
+            settwelve(true);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(false);
+            set25(true);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7)
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(7)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+        break;
+    
+        default: console.log('none')
+    
+      }};
+
+
+if(position==4){switch(scaleSchema){
+
+        case 'Major': 
+    
+        console.log('Major 4th')
+    if(!one)
+    {
+        setRoot1(true)  
+        setone(true);
+        settwo(false);
+        setthree(true);
+        setfour(false);
+        setfive(true);
+        setsix(true);
+        setseven(false);
+        seteight(true);
+        setnine(false);
+        setten(true);
+        seteleven(false);
+        settwelve(true);
+        setthirteen(true);
+        setfourteen(false);
+        setfifteen(true);
+        setsixteen(false);
+        setseventeen(true);
+        seteighteen(true);
+        setnineteen(false);
+        settwenty(true);
+        settwentyone(false);
+        settwentytwo(false);
+        settwentythree(true);
+        settwentyfour(false);
+        set25(true);
+        set26(true);
+        set27(false);
+        set28(true);
+        set29(false);
+        set30(true);
+    
+        setDisplay1(1)
+        setDisplay2(0)
+        setDisplay3(2)
+        setDisplay4(0)
+        setDisplay5(3)
+        setDisplay6(4)
+        setDisplay7(0)
+        setDisplay8(5)
+        setDisplay9(7)
+        setDisplay10(6)
+        setDisplay11(6)
+        setDisplay12(7)
+        setDisplay13(1)
+        setDisplay14(0)
+        setDisplay15(2)
+        setDisplay16(0)
+        setDisplay17(3)
+        setDisplay18(4)
+        setDisplay19(0)
+        setDisplay20(5)
+        setDisplay21(0)
+        setDisplay22(0)
+        setDisplay23(6)
+        setDisplay24(3)
+        setDisplay25(7)
+        setDisplay26(1)
+        setDisplay27(2)
+        setDisplay28(2)
+        setDisplay29(7)
+        setDisplay30(3)
+    
+    }
+        break;
+    
+        case 'Minor': console.log('b');
+    
+        console.log('Minor')
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(true);
+            settwelve(false);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(true);
+            set25(false);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7) 
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(0)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+    
+        break;
+    
+        case 'HarmMinor': 
+        console.log('A harm you cunt')
+    
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(false);
+            settwelve(true);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(false);
+            set25(true);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7)
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(7)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+        break;
+    
+        default: console.log('none')
+    
+      }};
+
+  if(position==5){switch(scaleSchema){
+
+        case 'Major': 
+    
+        console.log('Major 5th')
+    if(!one)
+    {
+        setRoot1(true)  
+        setone(true);
+        settwo(false);
+        setthree(true);
+        setfour(false);
+        setfive(true);
+        setsix(true);
+        setseven(false);
+        seteight(true);
+        setnine(false);
+        setten(true);
+        seteleven(false);
+        settwelve(true);
+        setthirteen(true);
+        setfourteen(false);
+        setfifteen(true);
+        setsixteen(false);
+        setseventeen(true);
+        seteighteen(true);
+        setnineteen(false);
+        settwenty(true);
+        settwentyone(false);
+        settwentytwo(false);
+        settwentythree(true);
+        settwentyfour(false);
+        set25(true);
+        set26(true);
+        set27(false);
+        set28(true);
+        set29(false);
+        set30(true);
+    
+        setDisplay1(1)
+        setDisplay2(0)
+        setDisplay3(2)
+        setDisplay4(0)
+        setDisplay5(3)
+        setDisplay6(4)
+        setDisplay7(0)
+        setDisplay8(5)
+        setDisplay9(7)
+        setDisplay10(6)
+        setDisplay11(6)
+        setDisplay12(7)
+        setDisplay13(1)
+        setDisplay14(0)
+        setDisplay15(2)
+        setDisplay16(0)
+        setDisplay17(3)
+        setDisplay18(4)
+        setDisplay19(0)
+        setDisplay20(5)
+        setDisplay21(0)
+        setDisplay22(0)
+        setDisplay23(6)
+        setDisplay24(3)
+        setDisplay25(7)
+        setDisplay26(1)
+        setDisplay27(2)
+        setDisplay28(2)
+        setDisplay29(7)
+        setDisplay30(3)
+    
+    }
+        break;
+    
+        case 'Minor': console.log('b');
+    
+        console.log('Minor')
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(true);
+            settwelve(false);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(true);
+            set25(false);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7) 
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(0)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+    
+        break;
+    
+        case 'HarmMinor': 
+        console.log('A harm you cunt')
+    
+        if(!one)
+        {
+            setRoot1(true)
+            setone(true);
+            settwo(false);
+            setthree(true);
+            setfour(true);
+            setfive(false);
+            setsix(true);
+            setseven(false);
+            seteight(true);
+            setnine(true);
+            setten(false);
+            seteleven(false);
+            settwelve(true);
+            setthirteen(true);
+            setfourteen(false);
+            setfifteen(true);
+            setsixteen(true);
+            setseventeen(false);
+            seteighteen(true);
+            setnineteen(false);
+            settwenty(true);
+            settwentyone(true);
+            settwentytwo(true);
+            settwentythree(false);
+            settwentyfour(false);
+            set25(true);
+            set26(true);
+            set27(false);
+            set28(true);
+            set29(true);
+            set30(false);
+    
+            setDisplay1(1)
+            setDisplay2(0) //
+            setDisplay3(2)
+            setDisplay4(3)
+            setDisplay5(0) //
+            setDisplay6(4)
+            setDisplay7(0) //
+            setDisplay8(5)
+            setDisplay9(6)
+            setDisplay10(0) //
+            setDisplay11(7)
+            setDisplay12(7)
+            setDisplay13(1)
+            setDisplay14(0)
+            setDisplay15(2)
+            setDisplay16(3)
+            setDisplay17(0)
+            setDisplay18(4)
+            setDisplay19(0)
+            setDisplay20(5)
+            setDisplay21(5)
+            setDisplay22(6)
+            setDisplay23(0)
+            setDisplay24(7)
+            setDisplay25(7)
+            setDisplay26(1)
+            setDisplay27(0)
+            setDisplay28(2)
+            setDisplay29(3)
+            setDisplay30(0)
+    
+        }
+        break;
+    
+        default: console.log('none')
+    
+      }};
 
 const checkScaleSchema = (isItHarmonicMinor) => {
 
-if(isItHarmonicMinor) {setScaleSchema("AminHarm")}
+if(isItHarmonicMinor) {setScaleSchema("HarmMinor")}
 
-if(!isItHarmonicMinor){setScaleSchema('Amin')}
+if(!isItHarmonicMinor){setScaleSchema('Minor')}
 
   setone(prevState=>!prevState);
 }
@@ -441,9 +1288,9 @@ const setMajorMinor = () => {
         console.log(isItMinor);
         setIsItMinor(!isItMinor)
 
-if(!isItMinor){setScaleSchema('A')}
+if(!isItMinor){setScaleSchema('Major')}
 
-if(isItMinor){setScaleSchema("Amin")}
+if(isItMinor){setScaleSchema("Minor")}
         
   setone(prevState=>!prevState);
 }
@@ -473,7 +1320,7 @@ if(isItMinor){setScaleSchema("Amin")}
                     setTimeout(function() { console.log(generatedPitches[index]); 
 
 
-                        if(scaleSchema == 'A'){
+                        if(scaleSchema == 'Major'){
                         
                         generatedPitches[0]= '1'; // force first pitch to root.
                         if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
@@ -482,7 +1329,7 @@ if(isItMinor){setScaleSchema("Amin")}
                         if(generatedPitches[index]=='9'){generatedPitches[index]='10'}
                         if(generatedPitches[index]=='11'){generatedPitches[index]='12'}}
 
-                        if(scaleSchema=="Amin"){
+                        if(scaleSchema=="Minor"){
                                 generatedPitches[0]= '1'; 
                                 if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
                                 if(generatedPitches[index]=='5'){generatedPitches[index]='4'}
@@ -492,7 +1339,7 @@ if(isItMinor){setScaleSchema("Amin")}
 
                         }
 
-                        if(scaleSchema=="AminHarm"){
+                        if(scaleSchema=="HarmMinor"){
                                 generatedPitches[0]= '1'; 
                                 if(generatedPitches[index]=="2"){generatedPitches[index]='3'}
                                 if(generatedPitches[index]=='5'){generatedPitches[index]='4'}
@@ -835,11 +1682,11 @@ switch(parameter){
 
         {isItMinor ?  <View style={{marginBottom: 30}}></View> : null}
 
-    { scaleSchema == "Amin" ? <TouchableOpacity style={{marginBottom: -11}}
+    { scaleSchema == "Minor" ? <TouchableOpacity style={{marginBottom: -11}}
         onPressIn={()=>{checkScaleSchema(true);}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor: "dodgerblue", padding: 8, borderRadius: 10, opacity: one ? 1 : 0}}>Natural</Text></TouchableOpacity>
 : null}
 
-{ scaleSchema == "AminHarm" ?
+{ scaleSchema == "HarmMinor" ?
 <TouchableOpacity style={{marginBottom: -11}}
         onPressIn={()=>{ checkScaleSchema(false)}}><Text style={{fontSize: 19, fontWeight: "900", backgroundColor:"dodgerblue", padding: 8, borderRadius: 10, opacity: one ? 1 : 0}}>Harmonic</Text></TouchableOpacity>
 : null}
@@ -936,7 +1783,20 @@ switch(parameter){
         onPress={()=>{isItGenerated = false; a30 ? buttonPress('30') : null; setArePitchesGenerated(false)}}><Text style={{fontSize: 19, fontWeight: "900", borderRadius: 10, backgroundColor: 'dodgerblue', padding: 8, opacity: a30 ? 1 : 0}}>{display30}</Text></TouchableOpacity>
 </View>
 </ImageBackground>
-<View style={{display: 'flex', flexDirection: 'row', marginTop: -48 , backgroundColor: 'white'}}>
+
+<View style={{display: 'flex', flexDirection: 'row', zIndex: 20000, backgroundColor: 'white'}}><TouchableOpacity style={{marginTop: -98}}
+        onPress={()=>{if(position>0){let newPosition = position - 1; setPosition(newPosition); }}}>
+                <Text style={{borderRadius: 10, marginRight: 5,padding: 8, fontSize: 19, fontWeight: "900", backgroundColor: 'dodgerblue'}}>🔽</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity style={{marginTop: -98}}>
+                <Text style={{ marginRight: 5,padding: 8, fontSize: 19, fontWeight: "900", }}>position</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity style={{marginTop: -98}}
+        onPress={()=>{if(position<6){let newPosition = position + 1; setPosition(newPosition); }}}>
+                <Text style={{borderRadius: 10, marginRight: 5,padding: 8, fontSize: 19, fontWeight: "900", backgroundColor: 'dodgerblue'}}>🔼</Text>
+                </TouchableOpacity>
+                </View>
+<View style={{display: 'flex', flexDirection: 'row', marginTop: -48, backgroundColor: 'white'}}>
 
 <TouchableOpacity style={{ }}
         onPress={()=>{ if(currentKeyNumber>0) { let wtf = currentKeyNumber -1;  setCurrentKeyNumber(currentKeyNumber-1); checkScale(wtf)}}}>
@@ -964,7 +1824,7 @@ switch(parameter){
                 </TouchableOpacity>
 
                 <TouchableOpacity style={{ }}
-        onPress={()=>{ if(currentKeyNumber<13){ let wtf = currentKeyNumber +1; setCurrentKeyNumber(currentKeyNumber+1); checkScale(wtf)}}}>
+                onPress={()=>{ if(currentKeyNumber<13){ let wtf = currentKeyNumber +1; setCurrentKeyNumber(currentKeyNumber+1); checkScale(wtf)}}}>
                 <Text style={{ marginLeft: 6, borderRadius: 10, padding: 8, textAlign: 'center',fontSize: 19, fontWeight: "900", backgroundColor: 'dodgerblue'}}>++</Text>
                 </TouchableOpacity>
                 
