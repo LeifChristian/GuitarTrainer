@@ -1,4 +1,5 @@
-import { StyleSheet, Image, TouchableOpacity, ImageBackground, TouchableHighlightComponent, Platform} from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, ImageBackground, Platform} from 'react-native';
+import WebView from 'react-native-webview'
 import { Audio } from "expo-av";
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
@@ -6,7 +7,10 @@ import {useEffect, useState} from 'react'
 import { RootTabScreenProps } from '../types';
 import Fretboard from '../assets/images/fretmax.png';
 import Sound from 'react-native-sound';
-import { def } from '@vue/shared';
+import MIDISounds from "midi-sounds-react";
+
+
+let midiSounds;
 
 // if generated is true;
 
@@ -832,6 +836,16 @@ switch(parameter){
 
   return (
     <View style={styles.container}>
+
+        {/* <WebView>
+
+<MIDISounds
+          ref={(ref) => (midiSounds = ref)}
+      
+          instruments={[7]}
+        />
+        
+        </WebView> */}
 
         {isItMinor ?  <View style={{marginBottom: 30}}></View> : null}
 
