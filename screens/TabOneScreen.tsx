@@ -98,7 +98,7 @@ export default function TabOneScreen({
   let generatedPitches = [];
   let isItGenerated = false;
 
-  const [pitchesWTFPressed, setPitchesWTFPressed] = useState(Array);
+  const [pitchesWTKPressed, setPitchesWTKPressed] = useState(Array);
   const [arePitchesGenerated, setArePitchesGenerated] = useState(Boolean);
   const [beginningOfPlayback, setBeginningOfPlayback] = useState(
     generatedPitches?.length
@@ -1662,9 +1662,9 @@ export default function TabOneScreen({
           style={{}}
           onPress={() => {
             if (currentKeyNumber > 0) {
-              let wtf = currentKeyNumber - 1;
+              let wtk = currentKeyNumber - 1;
               setCurrentKeyNumber(currentKeyNumber - 1);
-              checkScale(wtf);
+              checkScale(wtk);
             }
           }}
         >
@@ -1774,9 +1774,9 @@ export default function TabOneScreen({
           style={{}}
           onPress={() => {
             if (currentKeyNumber < 13) {
-              let wtf = currentKeyNumber + 1;
+              let wtk = currentKeyNumber + 1;
               setCurrentKeyNumber(currentKeyNumber + 1);
-              checkScale(wtf);
+              checkScale(wtk);
             }
           }}
         >
